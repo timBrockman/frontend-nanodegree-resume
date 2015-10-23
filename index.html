@@ -113,7 +113,10 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     /*
         an opening and closing set of slash asterisks for block comments.
     */
-
+    var safeStr = function(x){
+      x = x.replace('<', '&lt;');
+      return x.replace('>', '&gt;');
+    }
 
     if(document.getElementsByClassName('flex-item').length === 0) {
       document.getElementById('topContacts').style.display = 'none';
@@ -128,7 +131,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
       document.getElementById('projects').style.display = 'none';
     }
     if(document.getElementsByClassName('education-entry').length === 0) {
-      document.getElementById('education').style.display = 'none';
+      document.getElementById('education').style.backgroundColor = '#000';
     }
     if(document.getElementsByClassName('flex-item').length === 0) {
       document.getElementById('lets-connect').style.display = 'none';
