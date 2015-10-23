@@ -68,7 +68,13 @@ $(document).ready(function() {
     $('#name').html(iName);  
   });
 });
-
+function inName(){
+  fullName = bio.name;
+  var temps = fullName.split(' ');
+  temps[1] = temps[1].toUpperCase();
+  temps[0] = temps[0].substr(0,1).toUpperCase() + temps[0].substr(1).toLowerCase()
+  return temps.join(' ');
+}
 /*
 The next few lines about clicks are for the Collecting Click Locations quiz in Lesson 2.
 */
@@ -172,7 +178,8 @@ function initializeMap() {
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
-      // your code goes here!
+    // your code goes here!
+      infoWindow.open(map, marker);
     });
 
     // this is where the pin actually gets added to the map.

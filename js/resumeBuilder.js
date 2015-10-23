@@ -17,16 +17,16 @@ var bio = {
 	'picture URL':'https://en.gravatar.com/userimage/13176978/d79b43787e69587972a0f83404db17fa.jpg?size=200',
 };
 var projects = [{
-	'title':'',
-	'dates':'',
-	'description':'',
-	'url':'',
+	'title':'foo',
+	'dates':'foo',
+	'description':'foo',
+	'url':'foo',
 	'images':[
 		{
-			'url':'',
-			'small':'',
-			'medium':'',
-			'alt':''
+			'url':'foo',
+			'small':'foo',
+			'medium':'foo',
+			'alt':'foo'
 		}
 	]
 }]
@@ -83,6 +83,22 @@ for(k in work.jobs){
 		HTMLworkLocation.replace('%data%', work.jobs[k].location)+
 		HTMLworkDescription.replace('%data%', work.jobs[k].description));	
 }
+//projects
+for(k in projects){
+	$('#projects').append(HTMLprojectStart);
+	var images = '';
+	for(i in projects[k].images){
+		images = images + HTMLprojectImage.replace('%data%', projects[k].images[i]);
+	}
+	$('.project-entry:last').append(
+		HTMLprojectTitle.replace('%data%', projects[k].title)+
+		HTMLprojectDates.replace('%data%', projects[k].dates)+
+		HTMLworkDescription.replace('%data%', projects[k].description)+
+		images);	
+}
+
+
+//$('#main').append(internationalizeButton);
 
 
 /* some test values
