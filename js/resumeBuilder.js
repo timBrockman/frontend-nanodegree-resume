@@ -5,31 +5,49 @@ var bio = {
 	'name': 'Tim Brockman',
 	'role': 'Developer',
 	'welcomeMessage':'Hello',
-	'skills':['eat','drink','sleep'],
+	'skills':[
+		'eat',
+		'drink',
+		'sleep'],
 	'contacts':{
-		'phone':'4076027721',
-		'email':'tim@timbrockman.com',
-		'github':'timBrockman',
-		'linkedin':'timbrockman',
-		'location':'Celebration, FL'
+		'phone':{'name':'407-602-7721','url':''},
+		'email':{'name':'tim@timbrockman.com','url':'tim@timbrockman.com'},
+		'github':{'name':'@timBrockman','url':'https://github.com/timBrockman'},
+		'linkedin':{'name':'Tim Brockman','url':'https://www.linkedin.com/in/timbrockman'},
+		'twitter':{'name':'@TimBrockman','url':'https://twitter.com/TimBrockman'},
+		'location':['Celebration, FL', 'Winter Park, FL']
 	},
 	'contact info':'tim@timbrockman.com',
 	'picture URL':'https://en.gravatar.com/userimage/13176978/d79b43787e69587972a0f83404db17fa.jpg?size=200',
 };
 var projects = [{
-	'title':'foo',
-	'dates':'foo',
-	'description':'foo',
-	'url':'foo',
-	'images':[
-		{
-			'url':'foo',
-			'small':'foo',
-			'medium':'foo',
-			'alt':'foo'
-		}
-	]
-}]
+		'title':'Static Search',
+		'dates':'May 2015',
+		'description':'TFIDF (Cosine similarity) search from static content written in Javascript.',
+		'url':'https://github.com/timBrockman/static_search',
+		'images':[
+			{
+				'url':'images/197x148.gif',
+				'small':'foo',
+				'medium':'foo',
+				'alt':'foo'
+			}
+		]
+	},{
+		'title':'foo',
+		'dates':'foo',
+		'description':'foo',
+		'url':'foo',
+		'images':[
+			{
+				'url':'images/197x148.gif',
+				'small':'foo',
+				'medium':'foo',
+				'alt':'foo'
+			}
+		]
+	}
+]
 var work = {
 	'jobs':[
 		{
@@ -43,16 +61,18 @@ var work = {
 var education={
 	'schools':[
 		{
-			'school':'University of Central Florida',
+			'name':'University of Central Florida',
 			'degree':'BFA Visual Arts',
-			'year':'2003',
-			'location':'Orlando, FL'
+			'dates':'Graduated 2003',
+			'location':'Orlando, FL',
+			'major':'Graphic Design'
 		},
 		{
-			'school':'Udacity',
+			'name':'Udacity',
 			'degree':'ND Front End Developer',
-			'year':'Current',
-			'location':'Mountain View, CA'
+			'dates':'Current',
+			'location':'Mountain View, CA',
+			'major':'Front End Developer'
 		}],
 	'onlineCourses':[
 		{
@@ -62,14 +82,35 @@ var education={
 			'url':''
 		}]
 	};
-$('#header').append(HTMLheaderName)
-	.append(HTMLskillsStart);
+
+//display stuff
+
+$('#header').prepend(
+	HTMLheaderName.replace(/%data%/g, bio['name']) +
+	'\n' +
+	HTMLheaderRole.replace(/%data%/g, bio['role']) +
+	'\n' +
+	HTMLbioPic.replace(/%data%/g, bio['picture URL']));
+
+var allContacts =
+	'\n' +
+	HTMLmobile.replace(/%data%/g, bio.contacts.phone.name).replace('%url%',bio.contacts.phone.url) +
+	'\n' +
+	HTMLemail.replace(/%data%/g, bio.contacts.email.name).replace('%url%',bio.contacts.email.url) +
+	'\n' +
+//	HTMLtwitter.replace(/%data%/g, bio.contacts.twitter.name).replace('%url%',bio.contacts.twitter.url) +
+//	'\n' +
+	HTMLgithub.replace(/%data%/g, bio.contacts.github.name).replace('%url%',bio.contacts.github.url) +
+	'\n' +
+	HTMLcontactGeneric.replace('%contact%', 'LinkedIn').replace(/%data%/g, bio.contacts.linkedin.name).replace('%url%',bio.contacts.linkedin.url);
+$('#topContacts').append(allContacts);
+$('#footerContacts').append(allContacts);
 if(bio.skills.length > 0){
+	$('#header').append(HTMLskillsStart);
 	bio.skills.forEach(
 		function(d){
 			$('#skills').append(
 				 HTMLskills.replace('%data%',d));
-
 		}
 	);
 }
@@ -88,7 +129,7 @@ for(k in projects){
 	$('#projects').append(HTMLprojectStart);
 	var images = '';
 	for(i in projects[k].images){
-		images = images + HTMLprojectImage.replace('%data%', projects[k].images[i]);
+		images = images + HTMLprojectImage.replace('%data%', projects[k].images[i].url);
 	}
 	$('.project-entry:last').append(
 		HTMLprojectTitle.replace('%data%', projects[k].title)+
@@ -96,7 +137,18 @@ for(k in projects){
 		HTMLworkDescription.replace('%data%', projects[k].description)+
 		images);	
 }
+for(k in education.schools){
+	$('#education').append(HTMLschoolStart);
+	$('.education-entry:last').append(
+		HTMLschoolName.replace('%data%', education.schools[k].name)+
+		HTMLschoolDegree.replace('%data%', education.schools[k].degree)+
+		HTMLschoolDates.replace('%data%', education.schools[k].dates)+
+		HTMLschoolLocation.replace('%data%', education.schools[k].location)+
+		HTMLschoolMajor.replace('%data%', education.schools[k].major)
+	);
+}
 
+$('#mapDiv').append(googleMap);
 
 //$('#main').append(internationalizeButton);
 
