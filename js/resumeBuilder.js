@@ -19,36 +19,39 @@ var bio = {
 	},
 	'contact info':'tim@timbrockman.com',
 	'picture URL':'https://en.gravatar.com/userimage/13176978/d79b43787e69587972a0f83404db17fa.jpg?size=200',
-	'display':displayBio
+	'display':'displayBio'
 };
-var projects = [{
-		'title':'Static Search',
-		'dates':'May 2015',
-		'description':'TFIDF (Cosine similarity) search from static content written in Javascript.',
-		'url':'https://github.com/timBrockman/static_search',
-		'images':[
-			{
-				'url':'images/197x148.gif',
-				'small':'foo',
-				'medium':'foo',
-				'alt':'foo'
-			}
-		]
-	},{
-		'title':'foo',
-		'dates':'foo',
-		'description':'foo',
-		'url':'foo',
-		'images':[
-			{
-				'url':'images/197x148.gif',
-				'small':'foo',
-				'medium':'foo',
-				'alt':'foo'
-			}
-		]
+var projects = {'projects':
+		[{
+			'title':'Static Search',
+			'dates':'May 2015',
+			'description':'TFIDF (Cosine similarity) search from static content written in Javascript.',
+			'url':'https://github.com/timBrockman/static_search',
+			'images':[
+				{
+					'url':'images/197x148.gif',
+					'small':'foo',
+					'medium':'foo',
+					'alt':'foo'
+				}
+			]
+		},{
+			'title':'foo',
+			'dates':'foo',
+			'description':'foo',
+			'url':'foo',
+			'images':[
+				{
+					'url':'images/197x148.gif',
+					'small':'foo',
+					'medium':'foo',
+					'alt':'foo'
+				}
+			]
+		}
+		],
+	'display':'displayProjects'
 	}
-	]
 	//
 
 var work = {
@@ -60,7 +63,7 @@ var work = {
 			'location':'Winter Park, FL',
 			'description':'work'
 		}],
-	'display': displayWork
+	'display': 'displayWork'
 	};
 var education={
 	'schools':[
@@ -85,11 +88,11 @@ var education={
 			'dates':'',
 			'url':''
 		}],
-	'display':displayEducation
+	'display':'displayEducation'
 	};
 
 //display bio
-function displayBio(){
+//function displayBio(){
 	$('#header').prepend(
 		HTMLheaderName.replace(/%data%/g, bio['name']) +
 		'\n' +
@@ -119,9 +122,9 @@ function displayBio(){
 			}
 		);
 	}
-}	
+//}	
 //jobs in work
-function displayWork(){
+//function displayWork(){
 	for(k in work.jobs){
 		$('#workExperience').append(HTMLworkStart);
 		$('.work-entry:last').append(
@@ -131,24 +134,24 @@ function displayWork(){
 			HTMLworkLocation.replace('%data%', work.jobs[k].location)+
 			HTMLworkDescription.replace('%data%', work.jobs[k].description));	
 	}
-}
+//}
 //projects
-function displayProjects(){
-	for(k in projects){
+//function displayProjects(){
+	for(k in projects.projects){
 		$('#projects').append(HTMLprojectStart);
 		var images = '';
-		for(i in projects[k].images){
-			images = images + HTMLprojectImage.replace('%data%', projects[k].images[i].url);
+		for(i in projects.projects[k].images){
+			images = images + HTMLprojectImage.replace('%data%', projects.projects[k].images[i].url);
 		}
 		$('.project-entry:last').append(
-			HTMLprojectTitle.replace('%data%', projects[k].title)+
-			HTMLprojectDates.replace('%data%', projects[k].dates)+
-			HTMLworkDescription.replace('%data%', projects[k].description)+
+			HTMLprojectTitle.replace('%data%', projects.projects[k].title)+
+			HTMLprojectDates.replace('%data%', projects.projects[k].dates)+
+			HTMLworkDescription.replace('%data%', projects.projects[k].description)+
 			images);	
 	}
-}	
+//}	
 //education
-function displayEducation(){
+//function displayEducation(){
 	for(k in education.schools){
 		$('#education').append(HTMLschoolStart);
 		$('.education-entry:last').append(
@@ -159,10 +162,17 @@ function displayEducation(){
 			HTMLschoolMajor.replace('%data%', education.schools[k].major)
 		);
 	}
-}
+//}
 
 $('#mapDiv').append(googleMap);
-
+// trigger display functions and click log
+$(document).ready(function() {
+	//displayBio();
+	//bio.display();
+	//work.display();
+	//education.display();
+	//projects.display();
+});
 //$('#main').append(internationalizeButton);
 
 
