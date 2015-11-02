@@ -68,8 +68,7 @@ var bio = {
 				function(d) {
 		    		$('#skills').append(
 		        		HTMLskills.replace('%data%', d));
-				}
-			);
+				});
 		};
     }
 };
@@ -98,7 +97,7 @@ var projects = {
         }]
     }],
     'display': function(){
-        for (var k in projects.projects) {
+        for (k in projects.projects) {
             $('#projects').append(HTMLprojectStart);
             var images = '';
             for (i in projects.projects[k].images) {
@@ -114,8 +113,6 @@ var projects = {
         };        
     }
 };
-    //
-
 var work = {
     'jobs': [{
         'employer': 'Republic Equity',
@@ -125,7 +122,7 @@ var work = {
         'description': 'work'
     }],
     'display': function(){
-        for (var k in work.jobs) {
+        for (k in work.jobs) {
             $('#workExperience').append(HTMLworkStart);
             $('.work-entry:last').append(
                 HTMLworkEmployer.replace('%data%', work.jobs[k].employer) +
@@ -157,7 +154,7 @@ var education = {
         'url': ''
     }],
     'display': function(){
-        for (var k in education.schools) {
+        for (k in education.schools) {
             $('#education').append(HTMLschoolStart);
             $('.education-entry:last').append(
                 HTMLschoolName.replace('%data%', education.schools[k].name) +
@@ -169,33 +166,8 @@ var education = {
         };
     }
 };
-
 $('#mapDiv').append(googleMap);
-// trigger display functions and click log
-
 bio.display();
 work.display();
 education.display();
 projects.display();
-
-//$('#main').append(internationalizeButton);
-
-
-/* some test values
-$('#header').prepend(
-	HTMLheaderName.replace('%data%', bio['name']) +
-	'\n' +
-	HTMLheaderRole.replace('%data%', bio['role']) +
-	'\n' +
-	HTMLcontactGeneric.replace('%contact%', 'contact info').replace('%data%', bio['contact info']) +
-	'\n' +
-	HTMLbioPic.replace('%data%', bio['picture URL']));
-$('#workExperience').append(HTMLworkStart)
-	.append(
-		HTMLworkEmployer.replace('%data%', work['employer'])
-	);
-$('#education').append(HTMLschoolStart)
-	.append(
-		HTMLschoolName.replace('%data%', education[0].school)
-	);
-*/
